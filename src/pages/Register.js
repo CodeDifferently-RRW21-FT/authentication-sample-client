@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import axios from 'axios';
 
 const defaultValues = {
     email:'',
@@ -34,8 +35,13 @@ function Register(){
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, userData.email, userData.password)
         .then((response) => {
-            sessionStorage.setItem("Auth Token", response._tokenResponse.refreshToken);            
-            navigate("/home");
+            sessionStorage.setItem("Auth Token", response._tokenResponse.refreshToken); 
+            axios.post("http://localhost:8080/me",userData)
+            .then(response => {
+                console.log(response);
+                navigate("/home");
+            })           
+            
         }).catch((error)=> {
             console.log(error);
         })

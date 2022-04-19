@@ -10,7 +10,6 @@ auth.onAuthStateChanged((user)=> {
 export default function setupAxios(axios) {
     axios.interceptors.request.use(async config => {
         const authToken = sessionStorage.getItem("accessToken");
-        console.log(authToken);
         if(authToken){
             config.headers.Authorization = `Bearer ${authToken}`;
         }
