@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import {app} from '../firebase-config';
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 
 function Login(){
@@ -15,11 +14,9 @@ function Login(){
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
         .then((response)=> {
-            console.log(response);
             sessionStorage.setItem("Auth Token", response._tokenResponse.refreshToken);
             navigate("/home");
         })
-        //navigate("/home");
     }
 
     return(
