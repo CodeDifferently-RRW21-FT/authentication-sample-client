@@ -36,6 +36,8 @@ function Register(){
         .then((response) => {
             sessionStorage.setItem("Auth Token", response._tokenResponse.refreshToken);            
             navigate("/home");
+        }).catch((error)=> {
+            console.log(error);
         })
     }
 
